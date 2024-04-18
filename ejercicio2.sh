@@ -1,9 +1,23 @@
 #/bin/bash
 
+mostrarUsuarios() {
+	echo "Mostrando todos los usuarios..."
+	cut -d ":" -f 1,3 /etc/passwd
+}
+
 agregarUsuario() {
 	echo "Creando nuevo usuario..."
 	
 	echo "Introduce el nombre de usuario:"
+	read usuario
+	echo "Introduce el nombre completo:"
+	read nombreCompleto
+	echo "Introduce una contraseña:"
+	read password
+	
+	useradd -m -d "/home/$usuario" -G "$usuario" $nombreCompleto
+	usermod -c "$nombreCompleto" $usuario
+	passwd $password
 }
 
 while true: do
