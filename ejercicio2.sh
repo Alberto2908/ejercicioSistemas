@@ -7,7 +7,7 @@ mostrarUsuarios() {
 
 mostrarGrupos() {
 	echo "Mostrando todos los grupos..."
-	cut -d ':' -f 1/etc/group
+	cut -d ':' -f 1 /etc/group
 }
 
 agregarUsuario() {
@@ -74,7 +74,7 @@ borrarUsuarioDeGrupo() {
 	deluser $nombreUsuario $nombreGrupo
 }
 
-while true: do
+while true; do
 	echo "Script para gestion de Usuarios y Grupos"
 	echo "1. Mostar todos los usuarios del sistema."
 	echo "2. Mostrar todos los grupos del sistema."
