@@ -2,22 +2,76 @@
 
 mostrarUsuarios() {
 	echo "Mostrando todos los usuarios..."
-	cut -d ":" -f 1,3 /etc/passwd
+	cut -d ':' -f 1,3 /etc/passwd
+}
+
+mostrarGrupos() {
+	echo "Mostrando todos los grupos..."
+	cut -d ':' -f 1/etc/gruop
 }
 
 agregarUsuario() {
 	echo "Creando nuevo usuario..."
 	
 	echo "Introduce el nombre de usuario:"
-	read usuario
+	read nombreUsuario
 	echo "Introduce el nombre completo:"
 	read nombreCompleto
 	echo "Introduce una contraseña:"
 	read password
 	
-	useradd -m -d "/home/$usuario" -G "$usuario" $nombreCompleto
-	usermod -c "$nombreCompleto" $usuario
+	useradd -m -d "/home/$nombreUsuario" -G "$nombreUsuario" $nombreCompleto
+	usermod -c "$nombreCompleto" $nombreUsuario
 	passwd $password
+}
+
+agregarGrupo() {
+	echo "Creando nuevo grupo..."
+	
+	echo "Introduce el nombre del grupo:"
+	read nombreGrupo
+	
+	groupadd $nombreGrupo
+}
+
+borrarUsuario() {
+	echo "Borrando un usuario..."
+	
+	echo "Introduce nombre de usuario a borrar:"
+	read nombreUsuario
+	
+	userdel $nombreUsuario
+}
+
+borrarGrupo() {
+	echo "Borrando un grupo..."
+	
+	echo "Introduce el nombre del grupo a borrar:"
+	read nombreGrupo
+	
+	groupdel $nombreGrupo
+}
+
+agregarUsuarioAGrupo() {
+	echo "Añadiendo usuario a un grupo..."
+	
+	echo "Introduce el nombre de usuario:"
+	read nombreUsuario
+	echo "Introduce el nombre del grupo:"
+	read nombreGrupo
+	
+	usermod -aG $nombreGrupo $nombreUsuario
+}
+
+borrarUsuarioDeGrupo() {
+	echo "Borrando usuario de un grupo..."
+	
+	echo "Introduce el nombre de usuario:"
+	read nombreUsuario
+	echo "Introduce el nombre del grupo:"
+	read nombreGrupo
+	
+	deluser $nombreUsuario $nombreGrupo
 }
 
 while true: do
@@ -44,4 +98,6 @@ while true: do
 		6) borrarGrupo ;;
 		7) agregarUsuarioAGrupo ;;
 		8) borrarUsuarioDeGrupo ;;
-		9) salir ;;
+		9) exit ;;
+	esac
+done		
