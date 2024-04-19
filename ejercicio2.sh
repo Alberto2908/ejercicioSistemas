@@ -7,7 +7,7 @@ mostrarUsuarios() {
 
 mostrarGrupos() {
 	echo "Mostrando todos los grupos..."
-	cut -d ':' -f 1/etc/gruop
+	cut -d ':' -f 1/etc/group
 }
 
 agregarUsuario() {
