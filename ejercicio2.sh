@@ -2,7 +2,7 @@
 
 mostrarUsuarios() {
 	echo "Mostrando todos los usuarios..."
-	cut -d ':' -f 1,3 /etc/passwd
+	cut -d ':' -f 1 /etc/passwd
 }
 
 mostrarGrupos() {
@@ -17,12 +17,10 @@ agregarUsuario() {
 	read nombreUsuario
 	echo "Introduce el nombre completo:"
 	read nombreCompleto
-	echo "Introduce una contraseña:"
-	read password
 	
 	useradd -m -d "/home/$nombreUsuario" -G "$nombreUsuario" $nombreCompleto
 	usermod -c "$nombreCompleto" $nombreUsuario
-	passwd $password
+	passwd $nombreUsuario
 }
 
 agregarGrupo() {
