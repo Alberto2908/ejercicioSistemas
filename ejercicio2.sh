@@ -38,7 +38,7 @@ agregarGrupo() {
 	read nombreGrupo
 	
 	groupadd $nombreGrupo
-	
+		
 	echo "---------------------------------------"
 	echo "El grupo $nombreGrupo ha sido creado."
 	echo "---------------------------------------"
