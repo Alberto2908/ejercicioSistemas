@@ -2,25 +2,103 @@
 
 mostrarUsuarios() {
 	echo "Mostrando todos los usuarios..."
-	cut -d ":" -f 1,3 /etc/passwd
+	cut -d ':' -f 1 /etc/passwd
+	
+	echo "---------------------------------------"
+}
+
+mostrarGrupos() {
+	echo "Mostrando todos los grupos..."
+	cut -d ':' -f 1 /etc/group
+	
+	echo "---------------------------------------"
 }
 
 agregarUsuario() {
 	echo "Creando nuevo usuario..."
 	
 	echo "Introduce el nombre de usuario:"
-	read usuario
+	read nombreUsuario
 	echo "Introduce el nombre completo:"
 	read nombreCompleto
-	echo "Introduce una contraseña:"
-	read password
 	
-	useradd -m -d "/home/$usuario" -G "$usuario" $nombreCompleto
-	usermod -c "$nombreCompleto" $usuario
-	passwd $password
+	useradd $nombreUsuario
+	usermod -c "$nombreCompleto" $nombreUsuario
+	passwd $nombreUsuario
+	
+	echo "---------------------------------------"
+	echo "El usuario $nombreUsuario ha sido creado."
+	echo "---------------------------------------"
 }
 
-while true: do
+agregarGrupo() {
+	echo "Creando nuevo grupo..."
+	
+	echo "Introduce el nombre del grupo:"
+	read nombreGrupo
+	
+	groupadd $nombreGrupo
+	
+	echo "---------------------------------------"
+	echo "El grupo $nombreGrupo ha sido creado."
+	echo "---------------------------------------"
+}
+
+borrarUsuario() {
+	echo "Borrando un usuario..."
+	
+	echo "Introduce nombre de usuario a borrar:"
+	read nombreUsuario
+	
+	userdel $nombreUsuario
+	
+	echo "---------------------------------------"
+	echo "El usuario $nombreUsuario ha sido borrado."
+	echo "---------------------------------------"
+}
+
+borrarGrupo() {
+	echo "Borrando un grupo..."
+	
+	echo "Introduce el nombre del grupo a borrar:"
+	read nombreGrupo
+	
+	groupdel $nombreGrupo
+	
+	echo "---------------------------------------"
+	echo "El grupo $nombreGrupo ha sido creado."
+	echo "---------------------------------------"
+}
+
+agregarUsuarioAGrupo() {
+	echo "Añadiendo usuario a un grupo..."
+	
+	echo "Introduce el nombre de usuario:"
+	read nombreUsuario
+	echo "Introduce el nombre del grupo:"
+	read nombreGrupo
+	
+	usermod -aG $nombreGrupo $nombreUsuario
+	
+	echo "---------------------------------------"
+	echo "El usuario $nombreUsuario ha sido añadido al grupo $nombreGrupo."
+	echo "---------------------------------------"
+}
+
+borrarUsuarioDeGrupo() {
+	echo "Borrando usuario de un grupo..."
+	
+	echo "Introduce el nombre de usuario:"
+	read nombreUsuario
+	echo "Introduce el nombre del grupo:"
+	read nombreGrupo
+	
+	echo "---------------------------------------"
+	deluser $nombreUsuario $nombreGrupo
+	echo "---------------------------------------"
+}
+
+while true; do
 	echo "Script para gestion de Usuarios y Grupos"
 	echo "1. Mostar todos los usuarios del sistema."
 	echo "2. Mostrar todos los grupos del sistema."
@@ -44,4 +122,6 @@ while true: do
 		6) borrarGrupo ;;
 		7) agregarUsuarioAGrupo ;;
 		8) borrarUsuarioDeGrupo ;;
-		9) salir ;;
+		9) exit ;;
+	esac
+done		
