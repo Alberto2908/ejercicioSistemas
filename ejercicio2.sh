@@ -66,7 +66,7 @@ borrarGrupo() {
 	groupdel $nombreGrupo
 	
 	echo "---------------------------------------"
-	echo "El grupo $nombreGrupo ha sido creado."
+	echo "El grupo $nombreGrupo ha sido borrado."
 	echo "---------------------------------------"
 }
 
