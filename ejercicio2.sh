@@ -22,9 +22,9 @@ agregarUsuario() {
 	echo "Introduce el nombre completo:"
 	read nombreCompleto
 	
-	useradd $nombreUsuario
-	usermod -c "$nombreCompleto" $nombreUsuario
-	passwd $nombreUsuario
+	sudo useradd $nombreUsuario
+	sudo usermod -c "$nombreCompleto" $nombreUsuario
+	sudo passwd $nombreUsuario
 	
 	echo "---------------------------------------"
 	echo "El usuario $nombreUsuario ha sido creado."
@@ -37,7 +37,7 @@ agregarGrupo() {
 	echo "Introduce el nombre del grupo:"
 	read nombreGrupo
 	
-	groupadd $nombreGrupo
+	sudo groupadd $nombreGrupo
 		
 	echo "---------------------------------------"
 	echo "El grupo $nombreGrupo ha sido creado."
@@ -50,7 +50,7 @@ borrarUsuario() {
 	echo "Introduce nombre de usuario a borrar:"
 	read nombreUsuario
 	
-	userdel $nombreUsuario
+	sudo userdel $nombreUsuario
 	
 	echo "---------------------------------------"
 	echo "El usuario $nombreUsuario ha sido borrado."
@@ -63,7 +63,7 @@ borrarGrupo() {
 	echo "Introduce el nombre del grupo a borrar:"
 	read nombreGrupo
 	
-	groupdel $nombreGrupo
+	sudo groupdel $nombreGrupo
 	
 	echo "---------------------------------------"
 	echo "El grupo $nombreGrupo ha sido borrado."
@@ -78,7 +78,7 @@ agregarUsuarioAGrupo() {
 	echo "Introduce el nombre del grupo:"
 	read nombreGrupo
 	
-	usermod -aG $nombreGrupo $nombreUsuario
+	sudo usermod -aG $nombreGrupo $nombreUsuario
 	
 	echo "---------------------------------------"
 	echo "El usuario $nombreUsuario ha sido añadido al grupo $nombreGrupo."
@@ -94,7 +94,7 @@ borrarUsuarioDeGrupo() {
 	read nombreGrupo
 	
 	echo "---------------------------------------"
-	deluser $nombreUsuario $nombreGrupo
+	sudo deluser $nombreUsuario $nombreGrupo
 	echo "---------------------------------------"
 }
 
